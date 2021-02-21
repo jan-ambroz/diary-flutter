@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/DayInputs.dart';
+import 'package:flutter_app/providers/DbProvider.dart';
+
+import 'model/day.dart';
 
 class ContentCard extends StatefulWidget {
   @override
@@ -7,6 +10,8 @@ class ContentCard extends StatefulWidget {
 }
 
 class _ContentCardState extends State<ContentCard> {
+  final DayInputs dayInputs = new DayInputs();
+
   @override
   Widget build(BuildContext context) {
     return new Card(
@@ -42,7 +47,7 @@ class _ContentCardState extends State<ContentCard> {
           tabs: [
             Tab(icon: Icon(Icons.wb_sunny_outlined)),
             Tab(icon: Icon(Icons.nights_stay_outlined)),
-            Tab(icon: Icon(Icons.mood)),
+            Tab(icon: Icon(Icons.mood_outlined)),
           ],
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
@@ -73,12 +78,21 @@ class _ContentCardState extends State<ContentCard> {
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              _getDataFromInputs();
+            },
             child: Icon(Icons.save_alt, size: 36.0),
             backgroundColor: Colors.red,
           ),
         ),
       ],
     );
+  }
+
+  void _getDataFromInputs() {
+    String data = dayInputs.extractDataFromInputs();
+    int timestamp = DateTime.now().millisecondsSinceEpoch;
+
+    DBProvider.db.newDay(new Day(id: 234, data: data, timestamp: timestamp));
   }
 }

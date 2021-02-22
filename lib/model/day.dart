@@ -36,4 +36,9 @@ class Day {
         "data": data,
         "blocked": blocked,
       };
+
+  getReadableDate() {
+    DateTime date = new DateTime.fromMillisecondsSinceEpoch(int.parse(data));
+    return date.toString();
+  }
 }

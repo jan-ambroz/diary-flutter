@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DayInputs extends StatelessWidget {
-  final _firstGratefulRow = TextEditingController();
-  final _secondGratefulRow = TextEditingController();
-  final _thirdGratefulRow = TextEditingController();
+  final TextEditingController firstGratefulRow = TextEditingController();
+  final TextEditingController secondGratefulRow = TextEditingController();
+  final TextEditingController thirdGratefulRow = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DayInputs extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 64.0, 8.0),
               child: TextFormField(
-                controller: _firstGratefulRow,
+                controller: firstGratefulRow,
                 decoration: InputDecoration(
                   icon: Icon(Icons.mood_outlined, color: Colors.red),
                   labelText: "I am grateful for...",
@@ -28,7 +28,7 @@ class DayInputs extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 64.0, 8.0),
               child: TextFormField(
-                controller: _secondGratefulRow,
+                controller: secondGratefulRow,
                 decoration: InputDecoration(
                   icon: Icon(Icons.mood_outlined, color: Colors.red),
                   labelText: "I am grateful for...",
@@ -38,7 +38,7 @@ class DayInputs extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 64.0, 8.0),
               child: TextFormField(
-                controller: _thirdGratefulRow,
+                controller: thirdGratefulRow,
                 decoration: InputDecoration(
                   icon: Icon(Icons.mood_outlined, color: Colors.red),
                   labelText: "I am grateful for...",
@@ -53,9 +53,9 @@ class DayInputs extends StatelessWidget {
 
   String extractDataFromInputs() {
     Map<String, String> data = {
-      "grat_one": _firstGratefulRow.text,
-      "grat_two": _secondGratefulRow.text,
-      "grat_three": _thirdGratefulRow.text
+      "grat_one": firstGratefulRow.text,
+      "grat_two": secondGratefulRow.text,
+      "grat_three": thirdGratefulRow.text
     };
 
     return json.encode(data);

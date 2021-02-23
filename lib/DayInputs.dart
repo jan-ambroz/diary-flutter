@@ -47,6 +47,8 @@ class _DayInputsState extends State<DayInputs> {
   final TextEditingController secondGratefulRow = TextEditingController();
   final TextEditingController thirdGratefulRow = TextEditingController();
 
+  bool saved = false;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -84,6 +86,12 @@ class _DayInputsState extends State<DayInputs> {
                 ),
               ),
             ),
+            // if (saved)
+            //   CustomDialog(
+            //     title: "Saved",
+            //     description: "Your day was saved!",
+            //     buttonText: "Okay",
+            //   )
           ],
         ),
       ),
@@ -103,7 +111,13 @@ class _DayInputsState extends State<DayInputs> {
 
     String encodedJson = json.encode(data);
 
-    DBProvider.db
+    var raw = DBProvider.db
         .createDay(new Day(date: convertedDateTime, data: encodedJson));
+
+    if (raw != null) {
+      setState(() {
+        this.saved = true;
+      });
+    }
   }
 }

@@ -12,7 +12,7 @@ String clientToJson(Day data) {
 
 class Day {
   int id;
-  int timestamp;
+  String timestamp;
   String data;
   bool blocked;
 

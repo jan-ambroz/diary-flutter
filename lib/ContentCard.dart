@@ -1,8 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/DayInputs.dart';
-import 'package:flutter_app/providers/DbProvider.dart';
-
-import 'model/day.dart';
 
 class ContentCard extends StatefulWidget {
   @override
@@ -10,7 +9,13 @@ class ContentCard extends StatefulWidget {
 }
 
 class _ContentCardState extends State<ContentCard> {
-  final DayInputs dayInputs = new DayInputs();
+  final changeNotifier = new StreamController.broadcast();
+
+  @override
+  void dispose() {
+    changeNotifier.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +79,13 @@ class _ContentCardState extends State<ContentCard> {
   Widget _buildMulticityTab() {
     return Column(
       children: <Widget>[
-        Expanded(child: DayInputs()),
+        Expanded(
+            child: new DayInputs(shouldTriggerChange: changeNotifier.stream)),
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
           child: FloatingActionButton(
             onPressed: () {
-              _getDataFromInputs();
+              changeNotifier.sink.add(null);
             },
             child: Icon(Icons.save_alt, size: 36.0),
             backgroundColor: Colors.red,
@@ -87,12 +93,5 @@ class _ContentCardState extends State<ContentCard> {
         ),
       ],
     );
-  }
-
-  void _getDataFromInputs() {
-    String data = dayInputs.extractDataFromInputs();
-    int timestamp = DateTime.now().millisecondsSinceEpoch;
-
-    DBProvider.db.newDay(new Day(id: 234, data: data, timestamp: timestamp));
   }
 }

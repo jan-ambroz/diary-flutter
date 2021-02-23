@@ -1,9 +1,48 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/DbProvider.dart';
 
-class DayInputs extends StatelessWidget {
+import 'model/day.dart';
+
+class DayInputs extends StatefulWidget {
+  @override
+  _DayInputsState createState() => _DayInputsState();
+
+  final Stream shouldTriggerChange;
+
+  DayInputs({@required this.shouldTriggerChange});
+}
+
+class _DayInputsState extends State<DayInputs> {
+  StreamSubscription streamSubscription;
+
+  @override
+  initState() {
+    super.initState();
+    streamSubscription =
+        widget.shouldTriggerChange.listen((_) => extractDataFromInputs());
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    streamSubscription.cancel();
+  }
+
+  @override
+  didUpdateWidget(DayInputs old) {
+    super.didUpdateWidget(old);
+    // in case the stream instance changed, subscribe to the new one
+    if (widget.shouldTriggerChange != old.shouldTriggerChange) {
+      streamSubscription.cancel();
+      streamSubscription =
+          widget.shouldTriggerChange.listen((_) => extractDataFromInputs());
+    }
+  }
+
   final TextEditingController firstGratefulRow = TextEditingController();
   final TextEditingController secondGratefulRow = TextEditingController();
   final TextEditingController thirdGratefulRow = TextEditingController();
@@ -58,6 +97,13 @@ class DayInputs extends StatelessWidget {
       "grat_three": thirdGratefulRow.text
     };
 
-    return json.encode(data);
+    DateTime now = new DateTime.now();
+    String convertedDateTime =
+        "${now.year.toString()}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+
+    String encodedJson = json.encode(data);
+
+    DBProvider.db
+        .createDay(new Day(timestamp: convertedDateTime, data: encodedJson));
   }
 }

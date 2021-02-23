@@ -34,7 +34,7 @@ class DBProvider {
     });
   }
 
-  newDay(Day newDay) async {
+  createDay(Day newDay) async {
     final db = await database;
     //get the biggest id in the table
     var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Day");

@@ -11,10 +11,15 @@ class DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2.0,
-      margin: const EdgeInsets.all(2.0),
-      child: _buildCardContent(),
-    );
+        elevation: 2.0,
+        margin: const EdgeInsets.all(2.0),
+        child: InkWell(
+          onTap: () {
+            //show one day with data create DayWive
+          },
+          onLongPress: () {},
+          child: _buildCardContent(),
+        ));
   }
 
   Container _buildCardContent() {
@@ -39,40 +44,40 @@ class DayCard extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(day.date, style: airportNameStyle),
                   ),
-                  Text(day.date, style: airportShortNameStyle),
+                  // Text(day.date, style: airportShortNameStyle),
                 ],
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Icon(
-                  Icons.airplanemode_active,
-                  color: Colors.red,
-                ),
-              ),
-              Text(day.date, style: flightNumberStyle),
-            ],
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 40.0, top: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(day.date, style: airportNameStyle),
-                  ),
-                  Text(day.date, style: airportShortNameStyle),
-                ],
-              ),
-            ),
-          ),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: <Widget>[
+          //     Padding(
+          //       padding: const EdgeInsets.only(bottom: 8.0),
+          //       child: Icon(
+          //         Icons.airplanemode_active,
+          //         color: Colors.red,
+          //       ),
+          //     ),
+          //     Text(day.date, style: flightNumberStyle),
+          //   ],
+          // ),
+          // Expanded(
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(left: 40.0, top: 16.0),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: <Widget>[
+          //         Padding(
+          //           padding: const EdgeInsets.only(bottom: 8.0),
+          //           child: Text(day.date, style: airportNameStyle),
+          //         ),
+          //         Text(day.date, style: airportShortNameStyle),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

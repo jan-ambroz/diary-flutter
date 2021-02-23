@@ -25,10 +25,6 @@ class DayCard extends StatelessWidget {
   Container _buildCardContent() {
     TextStyle airportNameStyle =
         new TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600);
-    TextStyle airportShortNameStyle =
-        new TextStyle(fontSize: 36.0, fontWeight: FontWeight.w200);
-    TextStyle flightNumberStyle =
-        new TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500);
     return Container(
       height: 104.0,
       child: Row(

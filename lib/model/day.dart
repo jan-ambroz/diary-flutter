@@ -12,33 +12,28 @@ String clientToJson(Day data) {
 
 class Day {
   int id;
-  String timestamp;
+  String date;
   String data;
   bool blocked;
 
   Day({
     this.id,
-    this.timestamp,
+    this.date,
     this.data,
     this.blocked,
   });
 
   factory Day.fromMap(Map<String, dynamic> json) => new Day(
         id: json["id"],
-        timestamp: json["timestamp"],
+        date: json["date"],
         data: json["data"],
         blocked: json["blocked"] == 1,
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "date": timestamp,
+        "date": date,
         "data": data,
         "blocked": blocked,
       };
-
-  getReadableDate() {
-    DateTime date = new DateTime.fromMillisecondsSinceEpoch(int.parse(data));
-    return date.toString();
-  }
 }

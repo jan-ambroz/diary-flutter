@@ -104,6 +104,6 @@ class _DayInputsState extends State<DayInputs> {
     String encodedJson = json.encode(data);
 
     DBProvider.db
-        .createDay(new Day(timestamp: convertedDateTime, data: encodedJson));
+        .createDay(new Day(date: convertedDateTime, data: encodedJson));
   }
 }

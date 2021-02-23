@@ -43,7 +43,7 @@ class DBProvider {
     var raw = await db.rawInsert(
         "INSERT Into Day (id,date,data)"
         " VALUES (?,?,?)",
-        [id, newDay.data, newDay.timestamp]);
+        [id, newDay.date, newDay.data]);
     return raw;
   }
 

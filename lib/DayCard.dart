@@ -37,9 +37,9 @@ class DayCard extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(day.getReadableDate(), style: airportNameStyle),
+                    child: Text(day.date, style: airportNameStyle),
                   ),
-                  Text(day.timestamp.toString(), style: airportShortNameStyle),
+                  Text(day.date, style: airportShortNameStyle),
                 ],
               ),
             ),
@@ -55,7 +55,7 @@ class DayCard extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              Text(day.timestamp.toString(), style: flightNumberStyle),
+              Text(day.date, style: flightNumberStyle),
             ],
           ),
           Expanded(
@@ -66,9 +66,9 @@ class DayCard extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(day.data.toString(), style: airportNameStyle),
+                    child: Text(day.date, style: airportNameStyle),
                   ),
-                  Text(day.data.toString(), style: airportShortNameStyle),
+                  Text(day.date, style: airportShortNameStyle),
                 ],
               ),
             ),
